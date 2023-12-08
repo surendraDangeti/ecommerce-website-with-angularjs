@@ -1,0 +1,21 @@
+
+  
+  <div class="container">
+    <h3 class="d-flex flex-wrap">
+        @for (item of productsList?.data; track $index){
+            
+                <div class="card m-3" style="width: 18rem;">
+                    <img src="https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/7/q/w/s-all-rbc-white-one-nb-nicky-boy-original-imagjz5bgpmhcaea.jpeg?q=70" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{item.name}}</h5>
+                      <div class="card-desc">{{item.description}}</div>
+                      <div class="price-text">Price:<span class="text-success"> {{item.price}}</span> Rupees</div>
+                      <a href="#" class="btn btn-primary">Add to cart</a>
+                    </div>
+                  </div>
+                
+        }
+        @empty { there is no products
+        }
+    </h3>
+  </div>
