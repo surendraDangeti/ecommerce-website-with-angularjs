@@ -1,0 +1,31 @@
+.formcontainer{
+    padding: 25px 15px 25px 15px;
+    background-color:rgb(35, 120, 123);
+    border-radius: 8px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.addproduct-heading{
+    font-size: large;
+    color: rgb(35, 120, 123);
+}
+
+form label{
+    color: #fff;
+}
+
+.submit-btn{
+   background-color: #fff;
+   color: black;
+   width: fit-content;
+   border-radius: 5px;
+   max-width: 200px;
+   min-width: 180px;
+   cursor: pointer;
+}
+
+.submit-btn:hover{
+ background-color: rgb(51, 103, 105);
+ color: #fff;
+}

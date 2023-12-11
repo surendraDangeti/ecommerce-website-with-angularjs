@@ -1,0 +1,29 @@
+<div class="container mt-3">
+  <h4 class="text-center addproduct-heading">ADD Your Product</h4>
+  <div class="Row">
+  <form class="formcontainer" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name" />
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" formControlName="description" rows="6"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input type="number" class="form-control" id="price" formControlName="price" />
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input type="file" class="form-control" id="image" (change)="onFileChange($event)" />
+    </div>
+<div class="text-center">
+    <button type="submit" class="submit-btn text-center " [disabled]="!productForm.valid">Submit</button>
+  </div>
+  </form>
+</div>
+</div>

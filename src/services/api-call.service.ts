@@ -13,4 +13,8 @@ export class ApiCallService {
   getAllProducts(){
     return this._httpClient.get(`${environment.apiUrl}/products`)
   }
+
+  
+
+
 }

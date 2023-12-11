@@ -1,0 +1,30 @@
+.card-image{
+    height: 350px;
+    width: 350px;
+}
+
+.card-container {
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+  }
+  
+  .card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .cart-item-image{
+    height: 100px;
+    width: auto;
+  }
+
+  .cart-button{
+    background-color: rgb(35, 120, 123);
+    color: #fafafa;
+ }
+
+
+
+  

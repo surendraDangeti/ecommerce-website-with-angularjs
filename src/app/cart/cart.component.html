@@ -1,1 +1,50 @@
-<p>cart works!</p>
+<div class="container">
+  @for (item of cartList; track $index) {
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-3">
+          <img [src]="getImageData(item.image)" class="img-fluid" alt="Card Image">
+        </div>
+        <div class="col-md-9">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">{{ item.description }}</p>
+            <p class="card-text"><B>₹{{item.price}}/-</B></p>
+            <div class="d-flex align-items-center mb-3">
+              <button class="btn btn-outline-primary" (click)="manageHandler('+', item.id)">+</button>
+              <p class="card-text mx-3">Count: {{item.counter}}</p>
+              <button class="btn btn-outline-primary" (click)="manageHandler('-', item.id)">-</button>
+            </div>
+            <a class="btn cart-button" (click)="redirectHandler(item.id)">
+              View
+            </a>
+            <a class="btn cart-button mx-3" (click)="deleteHandler(item.id)">Remove</a>
+          </div>
+          </div>
+        </div>
+    </div>
+  } 
+  @empty {
+    <div class="text-center">No Orders Yet</div>
+  }
+</div>
+
+@if(cartList.length > 0){
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <p class="text-end fs-5">Total Price: ₹ {{ total }}/-</p>
+      </div>
+    </div>
+  
+    <div class="row mt-3">
+      <div class="col-12 text-end">
+        <button class="btn cart-button">Check Out</button>
+      </div>
+    </div>
+  </div>
+  
+  
+}
+
+
