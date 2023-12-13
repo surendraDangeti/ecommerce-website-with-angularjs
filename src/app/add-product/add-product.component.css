@@ -2,7 +2,7 @@
     padding: 25px 15px 25px 15px;
     background-color:rgb(35, 120, 123);
     border-radius: 8px;
-    width: 50%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -28,4 +28,11 @@ form label{
 .submit-btn:hover{
  background-color: rgb(51, 103, 105);
  color: #fff;
+}
+
+
+@media (max-width:500px) {
+    .formcontainer{
+        width: 90%;
+}
 }

@@ -1,0 +1,18 @@
+<nav>
+  <h2 class="logo">Innezon</h2>
+  <div class="bars" (click)="toggleNav()">
+  <i class="fa fa-bars"></i>
+  </div>
+  <ul class="nav-links" [ngClass]="{ 'active': isNavActive }">
+    <li class="nav-link"><a [routerLink]="'/'">Home</a></li>
+    <li class="nav-link"><a [routerLink]="'/addproduct'">Add product</a></li>
+    <li class="nav-link"><a [routerLink]="'/cart'">Cart</a></li>
+    <li class="nav-link auth"><a [routerLink]="'/signup'">Register</a></li>
+   
+    @if (showLogoutOption ) {
+      <li class="nav-link auth"><a (click)="signoutHandler()">Logout</a></li>
+    }@else {
+      <li class="nav-link auth"><a [routerLink]="'/signin'">Login</a></li>
+    }
+  </ul>
+</nav>

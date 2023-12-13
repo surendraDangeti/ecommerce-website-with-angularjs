@@ -3,6 +3,10 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { CartDataService } from '../../services/cart-data.service';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthDataService } from '../../services/auth-data.service';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +23,9 @@ export class CartComponent implements OnInit {
   constructor(
     private cartDataService: CartDataService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private authDataService: AuthDataService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -27,12 +33,12 @@ export class CartComponent implements OnInit {
     this.calculateTotalPrice();
   }
 
-  deleteHandler(id: number) {
+  deleteHandler(id: number): void {
     this.cartList = this.cartDataService.removeItem(id);
     this.calculateTotalPrice();
   }
 
-  manageHandler(operator: string, id: number) {
+  manageHandler(operator: string, id: number): void {
     this.cartDataService.counterHandler(operator, id);
     this.calculateTotalPrice();
   }
@@ -53,17 +59,48 @@ export class CartComponent implements OnInit {
     this.router.navigate(['/product', productId]);
   }
 
-  private calculateTotalPrice() {
-    this.total = 0;
+  checkOutHandler(): void {
+    if (this.checkAuthData()) {
+      const data = this.cartList;
+      const apiUrl = '/auth/add/order';
+      const orderData: any[] = data.map((item) => ({
+        productid: item.id,
+        quantity: item.counter,
+      }));
 
-    this.cartList.forEach((item: any) => {
-      const currentitemPrice = parseInt(item.price, 10) || 0;
-      const requiredItems = parseInt(item.counter, 10) || 0;
+      this.http.post<any>(environment.apiUrl + apiUrl, {
+        clientId: this.authDataService?.getAuthData(),
+        order: orderData,
+      }).subscribe(
+        (response: { auth: any }) => {
+          console.log('Your Order placed successfully:', response);
+          this.cartList = [];
+        },
+        (error: HttpErrorResponse) => {
+          console.error('Error placing order:', error);
+          console.error(`Status: ${error.status}, Message: ${error.message}`);
+        }
+      );
 
-      if (!isNaN(currentitemPrice) && !isNaN(requiredItems)) {
-        this.total += requiredItems * currentitemPrice;
-      }
-    });
+      console.log('Testing', this.cartList);
+    }
+  }
+
+  checkAuthData(): boolean {
+    return this.authDataService.getLocalStorageData();
+
+
+  }
+  
+
+  private calculateTotalPrice(): void {
+    this.total = this.cartList.reduce(
+      (acc, item) =>
+        acc +
+        (parseInt(item.price, 10) || 0) *
+          (parseInt(item.counter, 10) || 0),
+      0
+    );
   }
 }
 

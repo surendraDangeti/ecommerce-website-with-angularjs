@@ -14,7 +14,9 @@ export class ApiCallService {
     return this._httpClient.get(`${environment.apiUrl}/products`)
   }
 
-  
+  getAllorders(){
+    return this._httpClient.get(`${environment.apiUrl}/auth/orders`)
+  }
 
 
 }

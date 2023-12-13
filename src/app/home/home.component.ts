@@ -5,6 +5,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomeComponent implements OnInit {
     private _api: ApiCallService,
     private cartDataService: CartDataService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
 
   getImageData(data: any): SafeUrl {
@@ -38,6 +40,7 @@ export class HomeComponent implements OnInit {
 
   additem(item: any) {
     this.cartDataService.addToCart(item);
+    this.popupHandler(item)
   }
 
   ngOnInit(): void {
@@ -46,6 +49,10 @@ export class HomeComponent implements OnInit {
 
   redirectHandler(productId: number): void{
     this.router.navigate(['/product', productId]);
+  }
+
+  popupHandler(item: any) {
+    this.notificationService.changeMessage('Item is successfully added to your cart');
   }
 
   private GetProductsList() {

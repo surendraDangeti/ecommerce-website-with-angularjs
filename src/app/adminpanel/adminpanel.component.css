@@ -1,0 +1,12 @@
+.mat-table {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .mat-header-cell, .mat-cell {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  

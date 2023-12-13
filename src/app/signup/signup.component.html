@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card">
+        <h4 class="card-header text-center signin-heading">Sign Up</h4>
+        <div class="card-body">
+          <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter username" />
+            </div>
+
+            <div class="mb-4">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email" />
+            </div>
+
+            <div class="mb-4">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password" />
+            </div>
+
+            <div class="mb-4">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password" />
+            </div>
+
+            <div class="text-center my-3">
+              <p>Already have an account? <a routerLink="/signin">Sign In</a></p>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn signin-button mb-3" [disabled]="!signupForm.valid">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
