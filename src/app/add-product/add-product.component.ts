@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -15,7 +16,8 @@ import { environment } from '../../environments/environment';
 export class AddProductComponent implements OnInit {
   productForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private httpClient: HttpClient) {
+  constructor(private fb: FormBuilder, private httpClient: HttpClient,
+    private router:  Router) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -35,6 +37,7 @@ export class AddProductComponent implements OnInit {
         .subscribe(
           (response) => {
             console.log('Product added successfully:', response);
+            this.router.navigate(['/']);
           },
           (error) => {
             console.error('Error adding product:', error);
